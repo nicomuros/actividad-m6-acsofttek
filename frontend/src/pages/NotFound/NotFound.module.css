@@ -1,0 +1,35 @@
+.main {
+  background-color: #393939;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  background-color: #eee;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.title {
+  font-size: 80px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.description {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.button {
+  margin-top: 10px;
+}

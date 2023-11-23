@@ -1,0 +1,65 @@
+services:
+  # Servicio 'backend', contiene las configuraciones necesarias para poder ejecutar la aplicación de springboot
+  frontend:
+    container_name: m6-frontend # Nombre del contenedor
+    image: nicomuros/m6-frontend:v1 # Imagen de la aplicación
+    restart: unless-stopped # Se reinicia siempre, a no ser que se pause manualmente
+    ports: # Puertos que se exponen
+      - 5173:5173
+    networks: # Red de Docker por la que se comunicará con otros contenedores
+      - academia
+    volumes:
+      - ./frontend:/app # Ubicación donde se guardarán los datos
+    environment:
+      VITE_BACKEND_URL: /api
+    depends_on:
+      - backend
+
+  backend:
+    container_name: m6-backend # Nombre del contenedor
+    image: nicomuros/m6-backend:v1 # Imagen de la aplicación
+    restart: unless-stopped # Se reinicia siempre, a no ser que se pause manualmente
+    ports: # Puertos que se exponen
+      - 8080:8080
+    networks: # Red de Docker por la que se comunicará con otros contenedores
+      - academia
+    volumes:
+      - ./backend:/app # Ubicación donde se guardarán los datosw
+    environment: # Se reemplaza la ruta de la base de datos. En vez de "localhost" se dirige al contenedor "m5-mysql"
+      DB_SERVER: m5-mysql
+      DB_PORT: 3306
+      DB_NAME: softtek
+      DB_USERNAME: muros
+      DB_PASSWORD: password
+    depends_on: # "backend" inicia despues que se termine de cargar el servicio "db"
+      db:
+        condition: service_healthy
+
+  # Servicio 'db', contiene las configuraciones para la base de datos
+  db:
+    container_name: m5-mysql # Nombre del contenedor
+    image: mysql:8.0.33 # Imagen de la base de datos, en este caso se usa MySQL
+    ports: # Puertos que se exponen
+      - 3306:3306
+    environment: # Variables de entorno
+      MYSQL_DATABASE: softtek
+      MYSQL_USER: muros
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+
+    volumes:  # Ubicación donde se guardarán los datos
+      - academia_db:/var/lib/mysql
+    networks:  # Red de Docker por la que se comunicará con otros contenedores
+      - academia
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-p$$MYSQL_ROOT_PASSWORD"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+networks: # Configuración de la red de docker
+  academia:
+    driver: bridge
+volumes: # Configuración del almacen de datos de docker
+  academia_db:
