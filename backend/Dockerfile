@@ -13,5 +13,12 @@ RUN mvn -f /home/app/pom.xml clean package
 # Se expone un puerto especifico del contenedor
 EXPOSE 8080
 
+# Se configuran las variables de entorno
+ENV DB_SERVER=localhost
+ENV DB_PORT=3306
+ENV DB_NAME=softtek
+ENV DB_USERNAME=muros
+ENV DB_PASSWORD=password
+
 # Inicio del backend, ubicando el empaquetado
 ENTRYPOINT ["java","-jar","/home/app/target/actividad-m6-1.0.jar"]

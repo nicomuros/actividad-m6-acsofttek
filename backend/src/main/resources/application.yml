@@ -6,9 +6,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver # El nombre de la dependencia
-    url: jdbc:mysql://${DB_SERVER}:${DB_PORT:3306}/${DB_NAME} # URL de la conexión a la base de datos
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:mysql://${DB_SERVER:"localhost"}:${DB_PORT:3306}/${DB_NAME:"softtek"} # URL de la conexión a la base de datos
+    username: ${DB_USERNAME:"muros"}
+    password: ${DB_PASSWORD:"password"}
   jpa:
     show-sql: true # Para que muestre las consultas sql en la consola
     hibernate:

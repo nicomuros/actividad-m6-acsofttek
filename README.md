@@ -7,6 +7,7 @@ Este proyecto fue realizado como presentación para la **Academia Java + Springb
 - [Como usar el proyecto](#como-usar-el-proyecto)
     - [Dependencias](#dependencias)
     - [Instalación](#instalación)
+			- [Usando Kubernetes](#usando-kubernetes)
       - [Usando Docker Compose](#usando-docker-compose)
       - [Usando Maven y npm directamente](#usando-maven-y-npm-directamente)
 - [Arquitectura de la aplicación](#arquitectura-de-la-aplicación)
@@ -63,7 +64,7 @@ Para poder ejecutar el proyecto es necesario tener instaladas y configuradas las
 
 ### Usando Docker Compose
 
-El proyecto cuenta con un archivo `docker-compose.yml`, con el cual se podrá levantar el proyecto en un contenedor. Para ello es necesario tener instalado Docker y Docker Compose en el sistema.
+El proyecto cuenta con un archivo `docker-compose.yml`, con el cual se podrá levantar el proyecto en un contenedor. Para ello es necesario tener instalado Docker y Docker Compose en el sistema. Modificar el archivo `docker-compose.yml` con las credenciales de la base de datos, rutas y puertos que se deseen utilizar.
 
 * Ejecutar el siguiente comando, el cual iniciará y orquestará los contenedores definidos en el archivo `docker-compose.yml`:
 
