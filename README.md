@@ -18,7 +18,7 @@ Este proyecto fue realizado como presentación para la **Academia Java + Springb
       - [Estructura de Carpetas](#estructura-de-carpetas)
       - [Patrones y Buenas Prácticas](#patrones-y-buenas-prácticas)
         
-![Demo](https://github.com/nicomuros/actividad-m5-acsofttek/blob/main/capturas/funcionamiento.gif?raw=true)
+![Demo](https://github.com/nicomuros/actividad-m6-acsofttek/blob/main/capturas/funcionamiento.gif?raw=true)
 
 ## Descripción
 
@@ -70,6 +70,31 @@ El proyecto cuenta con un archivo `docker-compose.yml`, con el cual se podrá le
 
 `docker-compose up -d`
 
+### Usando imagenes de Docker Hub
+
+El proyecto cuenta con imagenes de Docker Hub, con las cuales se podrá levantar el proyecto en un contenedor. Para ello es necesario tener instalado Docker en el sistema. 
+
+1. Crear una red compartida con los contenedores con el siguiente comando: `docker network create m6`
+
+2. Iniciar una imagen de MySQL con el siguiente comando, modificando las credenciales y el puerto que se desee utilizar, asi como la red compartida con los otros contenedores: 
+`docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=softtek -e MYSQL_USER=muros -e MYSQL_PASSWORD=password -p 3306:3306 --network=m6 mysql:8.0.33`
+
+3. Iniciar una imagen del backend con el siguiente comando. DB_SERVICE es el nombre del contenedor de MySQL:
+`docker run -d --name backend -p 8080:8080 --network=m6 -e DB_SERVER='mysql' nicomuros/m6-backend:v1`
+
+Además, si se modificaron las credenciales de la base de datos, es necesario modificar las variables de entorno del backend.
+La lista de variables de entorno que se pueden modificar son:
+* `DB_SERVER`: Host de la base de datos. 'localhost' si no se especifica
+* `DB_PORT`: Puerto de la base de datos. '3306' si no se especifica
+* `DB_NAME`: Nombre de la base de datos. 'softtek' si no se especifica
+* `DB_USERNAME`: Usuario de la base de datos. 'muros' si no se especifica
+* `DB_PASSWORD`: Contraseña de la base de datos. 'password' si no se especifica
+
+4. Iniciar una imagen del frontend con el siguiente comando, configurando las variables de entorno que se deseen utilizar:
+`docker run -d --name frontend -p 5173:5173 -e VITE_BACKEND_URL='http://localhost:8080/api' --network=m6 nicomuros/m6-frontend:v1`
+
+
+
 ### Usando Maven y npm directamente
 
 Para poder ejecutar el proyecto es necesario tener instaladas y configuradas las siguientes dependencias:
@@ -106,6 +131,7 @@ Asegúrate de tener Node.js y npm instalados en tu sistema. Este proceso instala
 La estructura N-Tier o el diseño en capas se dividen las funcionalidades de la aplicación en varias capas o niveles claramente definidos, cada una con un propósito específico.
 
 * **Capa de Controlador (`/controlador`):** La capa de controlador se encarga de recibir los datos proporcionados por el cliente, llamar a los servicios correspondientes de la capa de servicio para realizar las operaciones necesarias y devolver las respuestas adecuadas al cliente.
+* 
 * **Capa de Servicio (`/servicio`):** Coordina la interacción entre la capa de controlador y la capa de acceso a datos. Además, se encarga de realizar validaciones y de preparar los datos antes de ser enviados a la capa de acceso a datos.
 
 * **Capa de Acceso a Datos (`/repositorio`):** La capa de acceso a datos incluye clases y componentes que se conectan a la base de datos, realizan consultas y operaciones CRUD (Crear, Leer, Actualizar, Eliminar).
