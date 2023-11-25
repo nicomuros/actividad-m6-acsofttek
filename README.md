@@ -1,5 +1,5 @@
 
-# Todo-App Full Stack con Springboot 3, React, MySQL, Docker-Compose, AWS y Kubernetes.
+# Todo-App Full Stack con Springboot 3, React, MySQL, Docker-Compose y Kubernetes.
 
 Este proyecto fue realizado como presentación para la **Academia Java + Springboot**, dictada por **Softtek** en conjunto con la **Universidad Siglo-XII**.
 
@@ -9,6 +9,7 @@ Este proyecto fue realizado como presentación para la **Academia Java + Springb
     - [Instalación](#instalación)
 			- [Usando Kubernetes](#usando-kubernetes)
       - [Usando Docker Compose](#usando-docker-compose)
+			- [Usando imagenes de Docker Hub](#usando-imagenes-de-docker-hub
       - [Usando Maven y npm directamente](#usando-maven-y-npm-directamente)
 - [Arquitectura de la aplicación](#arquitectura-de-la-aplicación)
     - [Backend](#backend)
@@ -36,7 +37,7 @@ Esta aplicación está construida usando SpringBoot 3, React (Vite), MySQL y pro
 Para poder usar el proyecto, siga los siguientes pasos:
 * Clonar el repositorio desde GitHub al sistema local. Puedes hacerlo utilizando Git y ejecutando el siguiente comando en tu terminal:
 
-`git clone https://github.com/nicomuros/actividad-m5-acsofttek.git`
+`git clone https://github.com/nicomuros/actividad-m6-acsofttek.git`
 
 * Navegar al directorio de la aplicación:
 
@@ -104,6 +105,7 @@ Para poder ejecutar el proyecto es necesario tener instaladas y configuradas las
 * **[Git](https://git-scm.com/downloads)**
 * **[Node 19](https://nodejs.org/en/download)**
 
+
 * Es importante tener configuradas las variables de entorno `JAVA_HOME` y `MAVEN_HOME` para ejecutar correctamente el empaquetado y la iniciación de la aplicación.
 
 * Iniciar MySQL y crear una base de datos llamada `softtek`. Asegurarse que esté escuchando el puerto **3306**. Las credenciales que posee de forma nativa la aplicación son `username: muros` `password: password`.
@@ -131,7 +133,6 @@ Asegúrate de tener Node.js y npm instalados en tu sistema. Este proceso instala
 La estructura N-Tier o el diseño en capas se dividen las funcionalidades de la aplicación en varias capas o niveles claramente definidos, cada una con un propósito específico.
 
 * **Capa de Controlador (`/controlador`):** La capa de controlador se encarga de recibir los datos proporcionados por el cliente, llamar a los servicios correspondientes de la capa de servicio para realizar las operaciones necesarias y devolver las respuestas adecuadas al cliente.
-* 
 * **Capa de Servicio (`/servicio`):** Coordina la interacción entre la capa de controlador y la capa de acceso a datos. Además, se encarga de realizar validaciones y de preparar los datos antes de ser enviados a la capa de acceso a datos.
 
 * **Capa de Acceso a Datos (`/repositorio`):** La capa de acceso a datos incluye clases y componentes que se conectan a la base de datos, realizan consultas y operaciones CRUD (Crear, Leer, Actualizar, Eliminar).
